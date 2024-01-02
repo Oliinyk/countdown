@@ -15,46 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">    
 
-    <style>
-        .count-section {
-            display: flex;
-            justify-content: center;
-            font-family: 'Barlow', sans-serif;
-        }
-        .count-section .section-title {
-            color: #D63636;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .count-wrap .counter {
-            display: flex;
-            justify-content: center;
-        }
-        .count-wrap .count-item {
-            text-align: center;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
-        .count-wrap .number {
-            border-radius: 4px;
-            background: #181818;
-            color: #FFF;
-            font-size: 80px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            height: 140px;
-            width: 140px;
-        }
-        .count-wrap .hint {
-            font-size: 16px;
-            font-weight: 700;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
@@ -72,39 +33,6 @@
         </div>
     </section>
 
-    <script>
-        let timer;
-        const COUNTER_KEY = 'my-counter';
-
-        function countDown(i, callback) {
-        timer = setInterval(function() {
-
-            hours = parseInt(i / 3600, 10);
-            minutes = parseInt((i % 3600) / 60, 10);
-            seconds = parseInt(i % 60, 10);
-
-            hours = hours < 10 ? "0" + hours : hours;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            document.getElementById("counter").innerHTML = "<div class='count-item'><div class='number'>" + hours + "</div><p class='hint'>HOURS</p></div> <div class='count-item'><div class='number'>" + minutes + "</div><p class='hint'>MINUTES</p></div>    <div class='count-item'><div class='number'>" + seconds + "</div><p class='hint'>SECONDS</p></div>";
-
-            if ((i--) > 0) {
-            window.sessionStorage.setItem(COUNTER_KEY, i);
-            } else {
-            window.sessionStorage.removeItem(COUNTER_KEY);
-            clearInterval(timer);
-            callback();
-            }
-        }, 1000);
-        }
-
-        window.onload = function() {
-            let countDownTime = window.sessionStorage.getItem(COUNTER_KEY) || 259200;
-            countDown(countDownTime, function() {
-                // alert("Show modal");
-            });
-        };
-    </script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
