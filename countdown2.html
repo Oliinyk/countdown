@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">    
+
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <section class="count-section">
+        <div class="container">
+            <h4 class="section-title">Countdown</h4>
+
+            <div class="count-wrap">
+                <div id="message" class="message">
+                    <div id="timer" class="counter"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script>
+function updateTimer() {
+    const currentTime = new Date().getTime();
+    const startTime = localStorage.getItem('startTime');
+    const elapsedTime = (currentTime - startTime) / 1000; // Прошедшее время в секундах
+    const remainingTime = Math.max(0, 72 * 3600 - elapsedTime); // Оставшееся время в секундах
+
+    const hours = Math.floor(remainingTime / 3600); // Часы
+    const minutes = Math.floor((remainingTime % 3600) / 60); // Минуты
+    const seconds = Math.floor(remainingTime % 60); // Секунды
+
+    // Форматирование вывода таймера
+    const formattedHours = ('0' + hours).slice(-2);
+    const formattedMinutes = ('0' + minutes).slice(-2);
+    const formattedSeconds = ('0' + seconds).slice(-2);
+
+    const timerElement = document.getElementById('timer');
+    timerElement.innerHTML = "<div class='count-item'><div class='number'>" + formattedHours + "</div><p class='hint'>HOURS</p></div> <div class='count-item'><div class='number'>" + formattedMinutes + "</div><p class='hint'>MINUTES</p></div>    <div class='count-item'><div class='number'>" + formattedSeconds + "</div><p class='hint'>SECONDS</p></div>";
+
+    // Обновляем таймер каждую секунду
+    setTimeout(updateTimer, 1000);
+}
+
+function initializeTimer() {
+    const startTime = localStorage.getItem('startTime');
+    if (!startTime) {
+        // Если это первое посещение страницы, устанавливаем начальное время
+        localStorage.setItem('startTime', new Date().getTime());
+    }
+    updateTimer(); // Запускаем таймер
+}
+
+initializeTimer(); // Инициализация таймера
+</script>
+</body>
+</html>
